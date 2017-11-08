@@ -15,12 +15,10 @@ RUN apk update && apk upgrade && \
  find /data/www -type f -exec chmod 644 {} \; && \
  find /data/www/wp-content -type d -exec chmod 775 {} \; && \
  find /data/www/wp-content -type f -exec chmod 664 {} \; && \
- chown -R www:www /var/lib/nginx && \
+ chown -R www:www /var/lib/nginx /var/tmp/nginx && \
  sed -ri 's/^(user|group) = nobody/\1 = www/g' /etc/php7/php-fpm.d/www.conf && \
- mkdir -p /data/mariadb && \
- mkdir -p /run/mysqld && \
- chown -R mysql:mysql /data/mariadb && \
- chown -R mysql:root /run/mysqld && \
+ mkdir -p /data/mariadb /run/mysqld && \
+ chown -R mysql:mysql /data/mariadb /run/mysqld && \
  echo "* Cleaning up..." && \
  apk del build-dependencies && \
  rm -rf /var/cache/* && rm /tmp/wordpress.tar.gz
