@@ -17,8 +17,10 @@ RUN apk update && apk upgrade && \
  find /data/www/wp-content -type f -exec chmod 664 {} \; && \
  chown -R www:www /var/lib/nginx /var/tmp/nginx && \
  sed -ri 's/^(user|group) = nobody/\1 = www/g' /etc/php7/php-fpm.d/www.conf && \
- sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 200M/g" /etc/php7/fpm/php.ini && \
- sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 200M/g" /etc/php7/fpm/php.ini && \
+ sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 200M/g" /etc/php7/php-fpm.d/php.ini && \
+ sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 200M/g" /etc/php7/php-fpm.d/php.ini && \
+ sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 2/" /etc/nginx/nginx.conf && \
+ sed -i -e"s/keepalive_timeout 2/keepalive_timeout 2;\n\tclient_max_body_size 200m/" /etc/nginx/nginx.conf && \
  mkdir -p /data/mariadb /run/mysqld && \
  chown -R mysql:mysql /data/mariadb /run/mysqld && \
  echo "* Cleaning up..." && \
