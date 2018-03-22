@@ -2,7 +2,7 @@ FROM alpine:latest
 MAINTAINER realies <docker@reali.es>
 RUN apk update && apk upgrade && \
  apk add --virtual build-dependencies curl && \
- apk add mariadb mariadb-client nginx php7 php7-fpm php7-gd php7-json php7-mysqli php7-zlib supervisor && \
+ apk add mariadb mariadb-client nginx supervisor php7 php7-fpm php7-mysqli php7-json php7-openssl php7-curl php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-ctype php7-mbstring php7-gd && \
  echo "* Downloading latest stable WordPress release..." && \
  curl -fL# http://wordpress.org/latest.tar.gz -o /tmp/wordpress.tar.gz && \
  echo "* Extracting..." && \
