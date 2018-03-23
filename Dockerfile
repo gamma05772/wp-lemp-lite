@@ -25,7 +25,6 @@ RUN apt-get update && apt-get upgrade && \
  mkdir -p /data/mariadb /run/mysqld && \
  chown -R mysql:mysql /data/mariadb /run/mysqld && \
  echo "* Cleaning up..." && \
- apk del build-dependencies && \
  rm -rf /var/cache/apk/* && rm /tmp/wordpress.tar.gz
 COPY config/supervisord.conf /etc/supervisord.conf
 COPY config/nginx.conf /etc/nginx/nginx.conf
